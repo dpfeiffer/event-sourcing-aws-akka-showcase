@@ -1,0 +1,4 @@
+POST        /time-entries/create             controllers.TimeEntryController.create
+GET         /time-entries/list               controllers.TimeEntryController.list(userId: java.util.UUID)
+POST        /time-entries/:id/approve        controllers.TimeEntryController.approve(id: java.util.UUID)
+POST        /time-entries/:id/decline        controllers.TimeEntryController.decline(id: java.util.UUID)
