@@ -1,4 +1,4 @@
-package emailservice.sqs
+package showcase.emailservice
 
 case class Envelope[P](
     receiptHandle: String,

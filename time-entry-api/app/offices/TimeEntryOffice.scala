@@ -8,6 +8,7 @@ import akka.util.Timeout
 import cats.data.EitherT
 import com.google.inject.{Inject, Singleton}
 import model._
+import showcase.events.Event
 
 import scala.concurrent.ExecutionContext
 

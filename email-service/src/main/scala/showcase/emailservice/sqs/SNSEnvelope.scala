@@ -1,4 +1,4 @@
-package emailservice.sqs
+package showcase.emailservice.sqs
 
 case class SNSEnvelope(
   subject: String,

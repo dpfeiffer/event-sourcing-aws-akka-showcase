@@ -1,4 +1,4 @@
-package emailservice.sqs
+package showcase.emailservice.sqs
 
 import akka.NotUsed
 import akka.stream.scaladsl.Source
@@ -8,6 +8,7 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.handlers.AsyncHandler
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.model.{Message, ReceiveMessageRequest, ReceiveMessageResult}
+
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 

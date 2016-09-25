@@ -9,9 +9,9 @@ import cats.data.{Validated, Xor}
 import cats.data.Validated.{Invalid, Valid}
 import model.Fail.{InvalidCommand, TimeEntryAlreadyExists, TimeEntryDoesNotExist}
 import model.TimeEntryStatus.{Approved, Declined, New}
-import model.events.{TimeEntryApproved, TimeEntryCreated, TimeEntryDeclined}
 import model._
 import org.joda.time.DateTime
+import showcase.events.{Event, TimeEntryApproved, TimeEntryCreated, TimeEntryDeclined}
 
 object TimeEntryAggregate {
   def props(id: UUID) = Props(classOf[TimeEntryAggregate], id)

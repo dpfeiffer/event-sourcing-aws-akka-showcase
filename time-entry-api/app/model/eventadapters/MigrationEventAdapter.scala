@@ -2,13 +2,13 @@ package model.eventadapters
 
 import akka.actor.ExtendedActorSystem
 import akka.persistence.journal.{EventAdapter, EventSeq}
-import model.events.{TimeEntryApproved, TimeEntryCreated, TimeEntryDeclined}
 import reactivemongo.bson._
+import showcase.events.{TimeEntryApproved, TimeEntryCreated, TimeEntryDeclined}
 import util.BSONHandlers._
 
 class MigrationEventAdapter(system: ExtendedActorSystem) extends EventAdapter {
 
-  implicit val timeEntryCreatedHandler = Macros.handler[TimeEntryCreated]
+  implicit val timeEntryCreatedHandler  = Macros.handler[TimeEntryCreated]
   implicit val timeEntryApprovedHandler = Macros.handler[TimeEntryApproved]
   implicit val timeEntryDeclinedHandler = Macros.handler[TimeEntryDeclined]
 
@@ -27,7 +27,7 @@ class MigrationEventAdapter(system: ExtendedActorSystem) extends EventAdapter {
   override def manifest(event: Any): String = event.getClass.getSimpleName
 
   override def toJournal(event: Any): Any = event match {
-    case e: TimeEntryCreated => BSON.write(e)
+    case e: TimeEntryCreated  => BSON.write(e)
     case e: TimeEntryApproved => BSON.write(e)
     case e: TimeEntryDeclined => BSON.write(e)
   }

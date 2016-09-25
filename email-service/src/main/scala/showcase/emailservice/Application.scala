@@ -1,4 +1,4 @@
-package emailservice
+package showcase.emailservice
 
 import akka.NotUsed
 import akka.actor.ActorSystem
@@ -7,10 +7,11 @@ import akka.stream.scaladsl.Flow
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.typesafe.config.ConfigFactory
-import emailservice.sqs._
 import net.ceedubs.ficus.Ficus._
+import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import play.api.libs.json.Json
-import emailservice.sqs.JsonProtocol._
+import showcase.emailservice.JsonProtocol._
+import showcase.emailservice.sqs.{SNSEnvelope, SqsSource, SqsSourceSettings}
 import showcase.events.{Event, TimeEntryApproved, TimeEntryCreated, TimeEntryDeclined}
 object Application {
 
@@ -32,7 +33,7 @@ object Application {
     )
 
     source
-        .map{msg =>msg
+        .map{msg =>
           Envelope(msg.receiptHandle,msg.body)
         }
         .map{ envelope =>

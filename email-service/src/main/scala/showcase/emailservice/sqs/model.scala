@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Lightbend Inc. <http://www.lightbend.com>
  */
-package emailservice.sqs
+package showcase.emailservice.sqs
 
 sealed trait SqsConnectorSettings {
   def endpoint: String

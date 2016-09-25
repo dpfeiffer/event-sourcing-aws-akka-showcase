@@ -1,4 +1,5 @@
 import cats.data.EitherT
+import showcase.events.Event
 
 import scala.concurrent.Future
 package object model {
