@@ -14,17 +14,21 @@ class MigrationEventAdapter(system: ExtendedActorSystem) extends EventAdapter {
 
   override def fromJournal(event: Any, manifest: String): EventSeq = {
     val e = manifest match {
-      case "TimeEntryCreated" =>
+      case "time_entry.created" =>
         BSON.read[BSONDocument, TimeEntryCreated](event.asInstanceOf[BSONDocument])
-      case "TimeEntryApproved" =>
+      case "time_entry.approved" =>
         BSON.read[BSONDocument, TimeEntryApproved](event.asInstanceOf[BSONDocument])
-      case "TimeEntryDeclined" =>
+      case "time_entry.declined" =>
         BSON.read[BSONDocument, TimeEntryDeclined](event.asInstanceOf[BSONDocument])
     }
     EventSeq(e)
   }
 
-  override def manifest(event: Any): String = event.getClass.getSimpleName
+  override def manifest(event: Any): String = event match {
+    case e: TimeEntryCreated => "time_entry.created"
+    case e: TimeEntryApproved => "time_entry.approved"
+    case e: TimeEntryDeclined => "time_entry.declined"
+  }
 
   override def toJournal(event: Any): Any = event match {
     case e: TimeEntryCreated  => BSON.write(e)
