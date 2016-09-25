@@ -9,5 +9,6 @@ case class TimeEntry(
     begin: DateTime,
     end: DateTime,
     timeEntryUserId: UUID,
-    createdByUserId: UUID
+    createdByUserId: UUID,
+    status: String
 )

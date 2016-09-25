@@ -17,9 +17,9 @@ object TimeEntryOfficeActor {
 
 class TimeEntryOfficeActor extends Actor with ActorLogging {
 
-  implicit val ec      = context.system.dispatcher
+  implicit val ec = context.system.dispatcher
   implicit val timeout = Timeout(5, TimeUnit.SECONDS)
-  var aggregates       = Map[UUID, ActorRef]()
+  var aggregates = Map[UUID, ActorRef]()
 
   override def receive: Receive = {
     case c: Command =>
@@ -31,6 +31,7 @@ class TimeEntryOfficeActor extends Actor with ActorLogging {
         case Success(Left(error)) =>
           log.warning(s"Processing command resulted in error. message=$error")
         case Success(Right(events)) =>
+          events.foreach(e => context.system.eventStream.publish(e))
           log.debug(s"Processing command was successful. events=$events")
       }
 
@@ -39,7 +40,7 @@ class TimeEntryOfficeActor extends Actor with ActorLogging {
 
   def aggregate(id: UUID): ActorRef = {
     aggregates.get(id) match {
-      case None    => createAggregate(id)
+      case None => createAggregate(id)
       case Some(x) => x
     }
   }
