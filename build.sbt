@@ -16,6 +16,8 @@ lazy val `time-entry-api` = (project in file("time-entry-api"))
       "org.reactivemongo"          %% "reactivemongo"                       % "0.11.9",
       "com.typesafe.scala-logging" %% "scala-logging"                       % "3.5.0",
       "net.codingwell"             %% "scala-guice"                         % "4.1.0",
+      "com.amazonaws"              % "aws-java-sdk-sns"                     % "1.11.37",
+      "net.ceedubs"                %% "ficus"                               % "1.1.2",
       ws
     )
   )
